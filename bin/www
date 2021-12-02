@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+require('dotenv').config();
 /**
  * Module dependencies.
  */
@@ -25,7 +25,11 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, () => {
+  console.log(`The server has started`);
+  console.log(`The homepage is at http://localhost:${port}`);
+  console.log(`The admin page is at http://localhost:${port}/admin`);
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

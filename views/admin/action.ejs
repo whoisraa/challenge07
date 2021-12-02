@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+  <style>
+    :root {
+      --orange-color: #f9b23e;
+      --orange-dark: #c78e32;
+      --orange-light: #ffca2c;
+    }
+
+    html,
+    body {
+      min-width: 290px;
+      font-family: 'Open Sans', Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    #navbar {
+      position: fixed;
+      min-width: 290px;
+      top: 0px;
+      left: 0px;
+      width: 300px;
+      height: 100%;
+      border-right: solid;
+      border-color: var(--orange-color);
+    }
+
+    header {
+      color: var(--orange-color);
+      margin: 10px;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: thin;
+    }
+
+    #main-doc header {
+      text-align: left;
+      margin: 0px;
+      font-weight: bold;
+    }
+
+    #navbar ul {
+      height: 88%;
+      padding: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    #navbar li {
+      border-top: 1px solid var(--orange-color);
+      list-style: none;
+      position: relative;
+      width: 100%;
+    }
+
+    #navbar a {
+      display: block;
+      padding: 10px 30px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #navbar a:hover {
+      background-color: var(--orange-color);
+      color: #ffffff;
+    }
+
+    #navbar #logout:hover {
+      background-color: #dc3545;
+    }
+
+    #main-doc {
+      position: absolute;
+      margin-left: 310px;
+      padding: 20px;
+      margin-bottom: 110px;
+    }
+
+    section article {
+      color: #ffffff;
+      margin: 15px;
+      font-size: 0.96em;
+    }
+
+    form {
+      min-width: 300px;
+    }
+
+    form .form-control:focus {
+      box-shadow: 0 0 10px var(--orange-color), 0 0 40px var(--orange-color, 0 0 60px var(--orange-color));
+    }
+
+    form .btn-warning {
+      background-color: var(--orange-color);
+    }
+
+    form .btn-warning:focus,
+    form .btn-warning:hover {
+      box-shadow: 0 0 10px var(--orange-light), 0 0 40px var(--orange-light, 0 0 80px var(--orange-light));
+    }
+
+    @media (max-width: 1024px) {
+    #main-doc {
+        position: relative;
+        margin-left: 910px;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    #navbar ul {
+        border: 1px solid var(--orange-color);
+        height: auto;
+    }
+
+    #navbar {
+        background-color: rgb(33,37,41);
+        position: absolute;
+        width: 100%;
+        top: 0;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        max-height: 275px;
+        border: none;
+        z-index: 1;
+        border-bottom: 2px solid;
+    }
+
+    #main-doc {
+        position: relative;
+        margin-left: 250px;
+        margin-top: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-doc {
+        position: relative;
+        margin-left: 350px;
+    }
+}
+
+@media (max-width: 400px) {    
+    #main-doc {
+        position: relative;
+        margin-left: 150px;
+        margin-top: 300px;
+    }
+}
+  </style>
+  <title>Dashboard</title>
+</head>
+
+<body class="bg-dark">
+  <nav id="navbar">
+    <header class="my-5">Dashboard</header>
+    <ul>
+      <li><a href="#user-game" id="user" class="nav-link text-white">user_game</a></li>
+      <li class="me-1"><a href="/admin/logout" id="logout" class="nav-link text-white">Logout</a></li>
+    </ul>
+  </nav>
+  <main id="main-doc">
+    <section class="main-section" id="user-game">
+      <header>user_game</header>
+      <article>
+        <div class="container">
+          <div class="col w-25">
+            <% if(typeof user !== 'undefined') { %>
+            <form action="/admin/update" method="post" class="form mt-5">
+              <h1 class="mb-3">Edit User</h1>
+              <% } else { %>
+              <form action="/admin/create" method="post" class="form mt-5">
+                <h1 class="mb-3">Add User</h1>
+                <% } %>
+
+                <div class="form-group mb-3">
+                  <label class="mb-2" for="username">Username :</label>
+                  <input type="text" class="form-control border-0 bg-light" name="username" minlength="3" tabindex="1"
+                    <% if(typeof user !== 'undefined') { %> value="<%= user.username %>" <% } %>>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="mb-2" for="password">Password :</label>
+                  <input type="password" class="form-control border-0 bg-light" name="password" minlength="6" tabindex="2"
+                    <% if(typeof user !== 'undefined') { %> value="<%= user.password %>" <% } %>>
+                </div>
+                <div class="form-group mb-3">
+                  <label class="mb-2" for="email">Email :</label>
+                  <input type="email" class="form-control border-0 bg-light" name="email" minlength="6" tabindex="3"
+                    <% if(typeof user !== 'undefined') { %> value="<%= user.email %>" <% } %>>
+                </div>
+                <div class="form-group">
+                  <% if(typeof user !== 'undefined') { %>
+                  <input type="hidden" name="id" value="<%= user.id %>">
+                  <% } %>
+                </div>
+                <button class="btn btn-warning fw-bold text-uppercase mt-3" type="submit" tabindex="4">submit</button>
+              </form>
+            </form>
+          </div>
+      </article>
+    </section>
+  </main>
+
+  <%- include('../partials/script') %>
+</body>
+
+</html>

@@ -1,13 +1,27 @@
 {
   "name": "challenge07",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Binar Challenge 7 Submission - Applying session and authentication",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "npx nodemon ./bin/www"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whoisraa/challenge07.git"
+  },
+  "author": "whoisraa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whoisraa/challenge07/issues"
+  },
+  "homepage": "https://github.com/whoisraa/challenge07#readme",
   "dependencies": {
+    "chalk": "^5.0.0",
     "cookie-parser": "~1.4.4",
+    "crypto-js": "^4.1.1",
     "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
